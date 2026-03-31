@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monkey 设置</title>
+  <link rel="stylesheet" href="../design/tokens.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <div class="page-header">
+      <div class="header-inner">
+        <span class="logo">🐵</span>
+        <div>
+          <h1 class="header-title">欢迎使用 Monkey</h1>
+          <p class="header-sub">配置你的 AI 服务，只需一次</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="form-card">
+
+      <!-- Provider selector -->
+      <div class="field-group">
+        <label class="field-label">AI 服务商</label>
+        <div class="pill-group" id="provider-pills">
+          <button class="pill active" data-provider="openai">OpenAI</button>
+          <button class="pill" data-provider="claude">Claude</button>
+          <button class="pill" data-provider="custom">其他</button>
+        </div>
+      </div>
+
+      <!-- API Key -->
+      <div class="field-group">
+        <label class="field-label" for="api-key">API Key</label>
+        <div class="input-row">
+          <input
+            type="password"
+            id="api-key"
+            class="text-input"
+            placeholder="sk-..."
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button class="btn-toggle-visibility" id="toggle-key-vis" title="显示/隐藏">👁</button>
+        </div>
+
+        <!-- Explainer -->
+        <div class="explainer">
+          <button class="explainer-toggle" id="explainer-toggle">
+            什么是 API Key？
+            <span class="explainer-icon">▼</span>
+          </button>
+          <div class="explainer-body" id="explainer-body" hidden>
+            <p>API Key 是你在 AI 服务商那里的访问密码，类似于账号密码。它让 Monkey 能代你调用 AI 来生成脚本。</p>
+            <p class="security-note">🔒 只存在你的浏览器里，Monkey 看不到它</p>
+            <div class="explainer-links" id="explainer-links">
+              <a href="https://platform.openai.com/api-keys" target="_blank" class="explainer-link" data-provider="openai">去 OpenAI 获取 →</a>
+              <a href="https://console.anthropic.com/account/keys" target="_blank" class="explainer-link" data-provider="claude" hidden>去 Anthropic 获取 →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom endpoint (shown only for "custom" provider) -->
+      <div class="field-group" id="endpoint-group" hidden>
+        <label class="field-label" for="api-endpoint">API Endpoint</label>
+        <input
+          type="url"
+          id="api-endpoint"
+          class="text-input"
+          placeholder="https://api.openai.com/v1/chat/completions"
+        >
+        <p class="field-hint">兼容 OpenAI Chat Completions 格式的接口地址</p>
+      </div>
+
+      <!-- Model ID -->
+      <div class="field-group">
+        <label class="field-label" for="model-id">模型</label>
+        <input
+          type="text"
+          id="model-id"
+          class="text-input"
+          placeholder="gpt-4o"
+        >
+        <p class="field-hint" id="model-hint">推荐：gpt-4o</p>
+      </div>
+
+      <!-- Test connection -->
+      <div class="field-group">
+        <button id="btn-test" class="btn btn-secondary btn-full">测试连接</button>
+        <div id="test-result" class="test-result" hidden></div>
+      </div>
+
+      <!-- Save -->
+      <div class="field-group">
+        <button id="btn-save" class="btn btn-primary btn-full">保存设置</button>
+      </div>
+
+      <!-- Start using -->
+      <div id="start-section" hidden>
+        <div class="divider"></div>
+        <button id="btn-start" class="btn btn-success btn-full">开始使用 Monkey →</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+/* Ensure [hidden] always wins over any display:flex/grid from author CSS */
+[hidden] { display: none !important; }
+
+:root {
+  /* Colors */
+  --color-primary: #2563EB;
+  --color-primary-light: #EFF6FF;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #666;
+  --color-text-muted: #AAA;
+  --color-border: #E0E0E0;
+  --color-bg-code: #1E1E2E;
+  --color-success: #16A34A;
+  --color-error: #DC2626;
+  --color-bg: #FFFFFF;
+  --color-bg-secondary: #F8F9FA;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 12px;
+  --space-l: 16px;
+  --space-xl: 24px;
+
+  /* Radius */
+  --radius-s: 6px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+
+  /* Typography */
+  --font-base: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "SF Mono", "Fira Code", "Fira Mono", monospace;
+  --text-xs: 11px;
+  --text-s: 12px;
+  --text-base: 13px;
+  --text-m: 14px;
+  --text-l: 15px;
+
+  /* Shadows */
+  --shadow-s: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-m: 0 2px 8px rgba(0,0,0,0.12);
+
+  /* Transitions */
+  --transition: 0.15s ease;
+}

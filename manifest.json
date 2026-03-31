@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Monkey",
+  "version": "1.0.0",
+  "description": "用自然语言描述，AI 帮你生成用户脚本，持久化注入任意网页",
+
+  "permissions": [
+    "storage",
+    "scripting",
+    "tabs",
+    "sidePanel",
+    "unlimitedStorage"
+  ],
+  "host_permissions": ["<all_urls>"],
+
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+
+  "side_panel": {
+    "default_path": "sidepanel/index.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content.js"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": true
+  },
+
+  "action": {
+    "default_title": "Monkey"
+  },
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

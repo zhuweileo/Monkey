@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monkey</title>
+  <link rel="stylesheet" href="../design/tokens.css">
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+
+  <!-- ── No API Key Gate ── -->
+  <div id="state-no-key" class="full-state" hidden>
+    <div class="gate-content">
+      <div class="gate-icon">🐵</div>
+      <h2 class="gate-title">先配置 API Key 就能用了</h2>
+      <p class="gate-sub">Monkey 需要一个 AI 服务来生成脚本</p>
+      <button id="btn-go-settings" class="btn btn-primary">去设置 →</button>
+    </div>
+  </div>
+
+  <!-- ── Main App ── -->
+  <div id="app" hidden>
+
+    <!-- Tab bar -->
+    <nav class="tab-bar">
+      <button class="tab active" data-tab="generate" id="tab-generate">生成</button>
+      <button class="tab" data-tab="scripts" id="tab-scripts">
+        脚本列表
+        <span class="badge" id="scripts-badge" hidden>0</span>
+      </button>
+      <button class="tab-settings" id="btn-settings" title="设置">⚙️</button>
+    </nav>
+
+    <!-- ── Generate Tab ── -->
+    <div id="tab-panel-generate" class="tab-panel">
+
+      <!-- Empty / Input state -->
+      <div id="state-input" class="generate-state">
+        <div class="input-area">
+          <textarea
+            id="user-input"
+            placeholder="描述你想在这个页面做什么，比如：隐藏广告、自动填写、修改样式..."
+            rows="4"
+          ></textarea>
+          <p class="helper-text">✦ 你不需要会写代码</p>
+          <button id="btn-generate" class="btn btn-primary btn-full">生成脚本</button>
+        </div>
+      </div>
+
+      <!-- Streaming state -->
+      <div id="state-streaming" class="generate-state" hidden>
+        <div class="streaming-header">
+          <span class="spinner"></span>
+          <span class="streaming-label">Monkey 正在为你写脚本...</span>
+        </div>
+        <div class="streaming-preview" id="streaming-preview" hidden>
+          <div class="streaming-code" id="streaming-code-preview"></div>
+        </div>
+        <button id="btn-cancel" class="btn btn-ghost btn-full mt-auto">取消</button>
+      </div>
+
+      <!-- Confirm state -->
+      <div id="state-confirm" class="generate-state" hidden>
+        <!-- Existing scripts notice -->
+        <div id="existing-notice" class="notice" hidden>
+          <span id="existing-notice-text"></span>
+        </div>
+
+        <!-- Description card -->
+        <div class="description-card">
+          <div class="card-title">这个脚本会做什么</div>
+          <div class="description-body" id="description-body"></div>
+          <button class="expand-btn" id="description-expand" hidden>展开全文</button>
+        </div>
+
+        <!-- Code block -->
+        <div class="code-section">
+          <button class="code-toggle" id="code-toggle">
+            <span class="code-toggle-label">查看代码</span>
+            <span class="code-toggle-icon">▼</span>
+          </button>
+          <div class="code-block" id="code-block" hidden>
+            <pre><code id="code-content"></code></pre>
+          </div>
+        </div>
+
+        <!-- URL pattern -->
+        <div class="pattern-section">
+          <label class="pattern-label" for="url-pattern">生效范围</label>
+          <input type="text" id="url-pattern" class="pattern-input" placeholder="https://example.com/*">
+          <div class="pattern-error" id="pattern-error" hidden></div>
+        </div>
+
+        <!-- Trust signal -->
+        <p class="trust-text">代码只存在你的浏览器里</p>
+
+        <!-- Actions -->
+        <div class="confirm-actions">
+          <button id="btn-confirm" class="btn btn-primary btn-full">好，保存并执行</button>
+          <button id="btn-regenerate" class="btn btn-ghost btn-full">重新生成</button>
+        </div>
+      </div>
+
+      <!-- Success state -->
+      <div id="state-success" class="generate-state" hidden>
+        <div class="success-content">
+          <div class="success-icon">✓</div>
+          <p class="success-text">已保存，刚刚在这个页面执行了</p>
+        </div>
+      </div>
+
+      <!-- Error state -->
+      <div id="state-error" class="generate-state" hidden>
+        <div class="error-content">
+          <p class="error-message" id="error-message"></p>
+          <div class="error-actions">
+            <button id="btn-retry" class="btn btn-primary" hidden>重试</button>
+            <button id="btn-error-settings" class="btn btn-ghost" hidden>去设置 API Key</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tab-panel-generate -->
+
+    <!-- ── Scripts Tab ── -->
+    <div id="tab-panel-scripts" class="tab-panel" hidden>
+
+      <!-- Empty state -->
+      <div id="scripts-empty" class="full-state-inner" hidden>
+        <div class="gate-icon">📝</div>
+        <h3 class="gate-title" style="font-size: var(--text-l)">还没有脚本</h3>
+        <p class="gate-sub">描述你的第一个需求，Monkey 帮你生成</p>
+        <button class="btn btn-primary" id="btn-go-generate">回到生成</button>
+      </div>
+
+      <!-- Script list -->
+      <ul class="script-list" id="script-list"></ul>
+
+    </div><!-- /tab-panel-scripts -->
+
+  </div><!-- /app -->
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>
