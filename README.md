@@ -82,6 +82,8 @@ git clone https://github.com/YOUR_USERNAME/monkey.git
 3. 点击 **测试连接** 验证可用性
 4. 点击 **保存设置**
 
+![配置页面](shotcuts/image3.png)
+
 ### 第二步：生成脚本
 
 1. 打开任意网页
